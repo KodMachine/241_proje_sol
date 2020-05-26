@@ -5,6 +5,7 @@
 #include "Vertical_Enemy.h"
 #include "Horizontal_Enemy.h"
 
+//custom design level 1 
 class Level_1:public Map
 {
 public:
