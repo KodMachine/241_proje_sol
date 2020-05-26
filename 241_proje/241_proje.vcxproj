@@ -153,6 +153,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Run.cpp" />
     <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Vertical_Enemy.cpp" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="rlutil.h" />
+    <ClInclude Include="Run.h" />
     <ClInclude Include="Trap.h" />
     <ClInclude Include="Vertical_Enemy.h" />
   </ItemGroup>

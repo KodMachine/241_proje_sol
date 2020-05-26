@@ -2,13 +2,14 @@
 
 Player::Player()
 {
-	moveType = 3;
+	moveType = 1;
 	symbol = 'P';
 	alive = true;
 }
 
 Player::Player(int X, int Y)
 {
+	moveType = 1;
 	locationX = X;
 	locationY = Y;
 	alive = true;
@@ -16,6 +17,7 @@ Player::Player(int X, int Y)
 
 Player::Player(int X, int Y, char C)
 {
+	moveType = 1;
 	locationX = X;
 	locationY = Y;
 	symbol = C;
@@ -24,6 +26,7 @@ Player::Player(int X, int Y, char C)
 
 void Player::death()
 {
+	exit(0);
 }
 
 bool Player::getAlive()
@@ -35,3 +38,4 @@ void Player::setAlive(bool B)
 {
 	alive = B;
 }
+

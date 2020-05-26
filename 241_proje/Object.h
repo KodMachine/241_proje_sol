@@ -10,12 +10,11 @@ protected:
 	int locationX;
 	int locationY;
 
-	//defines the move type of the object 0 -> non-movable 1 -> vertical 2 -> horizontal 3 -> input bound
-	int moveType;
-
 	//symbol of the object shown in console
 	char symbol;
 
+	//defines movetype of the object 1P 2V 3H 0T
+	int moveType;
 public:
 
 	//default constructor
@@ -29,6 +28,11 @@ public:
 	int getLocationY();
 	void setLocationX(int);
 	void setLocationY(int);
+	int getMoveType();
+	int step;
+	int getStep();
+	void setStep(int);
+	void setSymbol(char);
 
 
 

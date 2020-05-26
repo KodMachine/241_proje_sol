@@ -1,6 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
-
+#include "Object.h"
 #include <iostream>
 class Map
 {
@@ -12,7 +12,15 @@ public:
 	virtual void getInfo() = 0;
 	void playIntro();
 	bool** map;
-	
+	int getstartPointX();
+	int getStartPointY();
+	int getFinishX();
+	int getFinishY();
+	bool*& operator[](const int& index)
+	{
+		return map[index];
+	}
+
 protected:
 
 	int startPointX;

@@ -7,5 +7,6 @@ public:
 	Trap();
 	Trap(int, int);
 	Trap(int, int, char);
+	void move();
 };
 

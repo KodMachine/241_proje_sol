@@ -3,10 +3,10 @@
 Level_1::Level_1()
 {
 	victory = false;
-	objects[0] = new Player;
-	objects[1] = new Trap;
-	objects[2] = new Horizontal_Enemy;
-	objects[3] = new Vertical_Enemy;
+	objects[0] = &p;
+	objects[1] = &t;
+	objects[2] = &h;
+	objects[3] = &v;
 	map = new bool * [61];
 	for (int i = 0; i < 61; ++i)
 	{
@@ -36,10 +36,15 @@ void Level_1::drawMap()
 			if (y == 10 + startPointY) { rlutil::locate(x, y); std::cout << "O"; map[x - startPointX][y - startPointY] = false; }
 		}
 	}
-	spawnPlayer(1 + startPointX, 9 + startPointY);
-	spawnHorizontalEnemy(8, 7);
-	spawnVerticalEnemy(9, 8);
-	placeTrap(10, 10);
+	compY = 9 + startPointY;
+	compX = finishX - 1 ;
+	rlutil::locate(compX, compY);
+	std::cout << 'F' ;
+	
+	spawnPlayer(2 + startPointX, 9 + startPointY);
+	spawnHorizontalEnemy(45+ startPointX, 9+startPointY);
+	spawnVerticalEnemy(16 + startPointX, 9 + startPointY);
+	placeTrap(25 + startPointX, 9 + startPointY);
 }
 
 void Level_1::deleteMap()
@@ -48,6 +53,16 @@ void Level_1::deleteMap()
 
 void Level_1::getInfo()
 {
+}
+
+int Level_1::getCompX()
+{
+	return compX;
+}
+
+int Level_1::getCompY()
+{
+	return compY;
 }
 
 void Level_1::spawnPlayer(int x, int y)
@@ -76,5 +91,13 @@ void Level_1::placeTrap(int x, int y)
 	objects[1]->setLocationX(x);
 	objects[1]->setLocationY(y);
 	objects[1]->draw();
+}
+
+bool Level_1::isFinish(int a , int b)
+{
+	if (a == compX && b == compY)
+		return true;
+	else
+		return false;
 }
 

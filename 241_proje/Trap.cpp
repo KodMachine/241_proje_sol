@@ -2,7 +2,6 @@
 
 Trap::Trap()
 {
-	moveType = 0;
 	symbol = 'T';
 }
 
@@ -18,3 +17,4 @@ Trap::Trap(int X, int Y, char C)
 	locationY = Y;
 	symbol = C;
 }
+
