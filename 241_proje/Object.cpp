@@ -53,5 +53,9 @@ void Object::setSymbol(char c)
 
 void Object::draw()
 {
+	rlutil::resetColor();
+	rlutil::setColor(color);
+	rlutil::setBackgroundColor(bg_color);
 	rlutil::locate(locationX, locationY); std::cout << symbol;
+	rlutil::resetColor();
 }

@@ -12,6 +12,8 @@ protected:
 
 	//symbol of the object shown in console
 	char symbol;
+	int color;
+	int bg_color;
 
 	//defines movetype of the object 1P 2V 3H 0T
 	int moveType;

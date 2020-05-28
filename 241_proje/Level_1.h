@@ -16,14 +16,16 @@ public:
 	void getInfo();
 	int getCompX();
 	int getCompY();
-	Object* objects[4];
+	Object* objects[5];
 	void spawnPlayer(int, int);
-	void spawnHorizontalEnemy(int, int);
-	void spawnVerticalEnemy(int, int);
-	void placeTrap(int, int);
+	void spawnHorizontalEnemy(int, int, Horizontal_Enemy* obj);
+	void spawnVerticalEnemy(int, int, Vertical_Enemy* obj);
+	void placeTrap(int, int, Trap* obj);
 	bool isFinish(int, int);
+	void playIntro();
 	Player p;
 	Vertical_Enemy v;
+	Vertical_Enemy v2;
 	Horizontal_Enemy h;
 	Trap t;
 	

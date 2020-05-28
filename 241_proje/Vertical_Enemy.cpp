@@ -4,6 +4,8 @@ Vertical_Enemy::Vertical_Enemy()
 {
 	moveType = 2;
 	symbol = 'V';
+	color = 12;
+	bg_color = 12;
 }
 
 Vertical_Enemy::Vertical_Enemy(int X, int Y)
@@ -11,6 +13,9 @@ Vertical_Enemy::Vertical_Enemy(int X, int Y)
 	moveType = 2;
 	locationX = X;
 	locationY = Y;
+	symbol = 'V';
+	color = 12;
+	bg_color = 12;
 }
 
 Vertical_Enemy::Vertical_Enemy(int X, int Y, char C)
@@ -19,6 +24,8 @@ Vertical_Enemy::Vertical_Enemy(int X, int Y, char C)
 	locationX = X;
 	locationY = Y;
 	symbol = C;
+	color = 12;
+	bg_color = 12;
 }
 
 

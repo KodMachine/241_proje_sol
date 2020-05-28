@@ -10,6 +10,7 @@ public:
 	void death();
 	bool getAlive();
 	void setAlive(bool);
+	void victory();
 
 private:
 

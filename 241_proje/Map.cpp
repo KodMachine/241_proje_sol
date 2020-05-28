@@ -8,10 +8,6 @@ Map::Map()
 	finishY = 20;
 }
 
-void Map::playIntro()
-{
-}
-
 int Map::getstartPointX()
 {
 	return startPointX;

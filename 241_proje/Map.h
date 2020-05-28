@@ -10,7 +10,7 @@ public:
 	virtual void drawMap() = 0;
 	virtual void deleteMap() = 0;
 	virtual void getInfo() = 0;
-	void playIntro();
+	virtual void playIntro() = 0;
 	bool** map;
 	int getstartPointX();
 	int getStartPointY();

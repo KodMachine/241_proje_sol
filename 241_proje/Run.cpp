@@ -23,6 +23,12 @@ void Run::moveEnemy(Object* &v,bool** map)
 			v->draw();
 		}
 	}
+	if (v->getMoveType() == 0)
+	{
+		//Trap
+		rlutil::locate(v->getLocationX(), v->getLocationY());
+		v->draw();
+	}
 	else if(v->getMoveType() == 3)
 	{
 		//Horizontal
@@ -99,233 +105,238 @@ void Run::movePlayer(Object*& v, bool** map, int i)
 			v->draw();
 		}
 	}
+	else {
+		v->draw();
+	}
 }
 
 void Run::play()
 {
-	level.drawMap();
-	// Printing elements of an array using 
-	// foreach loop 
-	bool jumped = false;
 	rlutil::CursorHider curs;
+	bool jumped = false;
 	bool jump = false;
-	while (!level.isFinish(level.p.getLocationX(),level.p.getLocationY()))
+	while (true)
 	{
-		rlutil::msleep(75);
-		if (kbhit())
+		level.drawMap();
+		while ((!level.isFinish(level.p.getLocationX(), level.p.getLocationY())) && level.p.getAlive())
 		{
-			int i = rlutil::getkey();
-			//if jumped
-			if (i == rlutil::KEY_UP)
+			rlutil::msleep(75);
+			if (kbhit())
 			{
-				jump = true;
-				//rising
-				for (int k = 0; k < 5; k++)
+				int i = rlutil::getkey();
+				//if jumped
+				if (i == rlutil::KEY_UP)
 				{
-					rlutil::msleep(75);
-					movePlayer(level.objects[0], level.map, rlutil::KEY_UP);
-					for (Object* x : level.objects)
+					jump = true;
+					//rising
+					for (int k = 0; k < 5; k++)
 					{
-						if (x->getMoveType() == 1)
-							continue;
-						else
-							moveEnemy(x, level.map);
-						if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+						rlutil::msleep(75);
+						movePlayer(level.objects[0], level.map, rlutil::KEY_UP);
+						for (Object* x : level.objects)
 						{
-							level.p.setAlive(false);
-							level.p.death();
-						}
-					}
-					//if jumped left and right movement
-					if (kbhit())
-					{
-						i = rlutil::getkey();
-						if(i == rlutil::KEY_LEFT)
-						{
-							rlutil::msleep(75);
-							movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
-							for (Object* x : level.objects)
+							if (x->getMoveType() == 1)
+								continue;
+							else
+								moveEnemy(x, level.map);
+							if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 							{
-								if (x->getMoveType() == 1)
-									continue;
-								else
-									moveEnemy(x, level.map);
-								if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+								level.p.setAlive(false);
+								level.p.death();
+							}
+						}
+						//if jumped left and right movement
+						if (kbhit())
+						{
+							i = rlutil::getkey();
+							if (i == rlutil::KEY_LEFT)
+							{
+								rlutil::msleep(75);
+								movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
+								for (Object* x : level.objects)
 								{
-									level.p.setAlive(false);
-									level.p.death();
+									if (x->getMoveType() == 1)
+										continue;
+									else
+										moveEnemy(x, level.map);
+									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+									{
+										level.p.setAlive(false);
+										level.p.death();
+									}
+								}
+							}
+							else if (i == rlutil::KEY_RIGHT)
+							{
+								rlutil::msleep(75);
+								movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
+								for (Object* x : level.objects)
+								{
+									if (x->getMoveType() == 1)
+										continue;
+									else
+										moveEnemy(x, level.map);
+
+									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+									{
+										level.p.setAlive(false);
+										level.p.death();
+									}
 								}
 							}
 						}
-						else if (i == rlutil::KEY_RIGHT)
+					}
+					//fall
+					while (level.map[level.p.getLocationX() - 5][level.p.getLocationY() - 5 + 1])
+					{
+						rlutil::msleep(75);
+						movePlayer(level.objects[0], level.map, rlutil::KEY_DOWN);
+						for (Object* x : level.objects)
 						{
-							rlutil::msleep(75);
-							movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
-							for (Object* x : level.objects)
+							if (x->getMoveType() == 1)
+								continue;
+							else
+								moveEnemy(x, level.map);
+							if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 							{
-								if (x->getMoveType() == 1)
-									continue;
-								else
-									moveEnemy(x, level.map);
-
-								if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+								level.p.setAlive(false);
+								level.p.death();
+							}
+						}
+						if (kbhit())
+						{
+							i = rlutil::getkey();
+							if (i == rlutil::KEY_LEFT)
+							{
+								rlutil::msleep(75);
+								movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
+								for (Object* x : level.objects)
 								{
-									level.p.setAlive(false);
-									level.p.death();
+									if (x->getMoveType() == 1)
+										continue;
+									else
+										moveEnemy(x, level.map);
+									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+									{
+										level.p.setAlive(false);
+										level.p.death();
+									}
+								}
+							}
+							else if (i == rlutil::KEY_RIGHT)
+							{
+								rlutil::msleep(75);
+								movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
+								for (Object* x : level.objects)
+								{
+									if (x->getMoveType() == 1)
+										continue;
+									else
+										moveEnemy(x, level.map);
+
+									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+									{
+										level.p.setAlive(false);
+										level.p.death();
+									}
 								}
 							}
 						}
 					}
 				}
-				//fall
-				while (level.map[level.p.getLocationX()-5][level.p.getLocationY()-5+1])
+				//not jumped
+				else
 				{
-					rlutil::msleep(75);
-					movePlayer(level.objects[0], level.map, rlutil::KEY_DOWN);
+					movePlayer(level.objects[0], level.map, i);
 					for (Object* x : level.objects)
 					{
 						if (x->getMoveType() == 1)
 							continue;
-						else
-							moveEnemy(x, level.map);
 						if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 						{
 							level.p.setAlive(false);
 							level.p.death();
 						}
 					}
-					if (kbhit())
+					while (level.map[level.p.getLocationX() - 5][level.p.getLocationY() - 5 + 1])
 					{
-						i = rlutil::getkey();
-						if (i == rlutil::KEY_LEFT)
+						rlutil::msleep(75);
+						movePlayer(level.objects[0], level.map, rlutil::KEY_DOWN);
+						for (Object* x : level.objects)
 						{
-							rlutil::msleep(75);
-							movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
-							for (Object* x : level.objects)
+							if (x->getMoveType() == 1)
+								continue;
+							else
+								moveEnemy(x, level.map);
+							if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 							{
-								if (x->getMoveType() == 1)
-									continue;
-								else
-									moveEnemy(x, level.map);
-								if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
-								{
-									level.p.setAlive(false);
-									level.p.death();
-								}
+								level.p.setAlive(false);
+								level.p.death();
 							}
 						}
-						else if (i == rlutil::KEY_RIGHT)
+						if (kbhit())
 						{
-							rlutil::msleep(75);
-							movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
-							for (Object* x : level.objects)
+							i = rlutil::getkey();
+							if (i == rlutil::KEY_LEFT)
 							{
-								if (x->getMoveType() == 1)
-									continue;
-								else
-									moveEnemy(x, level.map);
-
-								if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+								rlutil::msleep(75);
+								movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
+								for (Object* x : level.objects)
 								{
-									level.p.setAlive(false);
-									level.p.death();
+									if (x->getMoveType() == 1)
+										continue;
+									else
+										moveEnemy(x, level.map);
+									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+									{
+										level.p.setAlive(false);
+										level.p.death();
+									}
+								}
+							}
+							else if (i == rlutil::KEY_RIGHT)
+							{
+								rlutil::msleep(75);
+								movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
+								for (Object* x : level.objects)
+								{
+									if (x->getMoveType() == 1)
+										continue;
+									else
+										moveEnemy(x, level.map);
+
+									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+									{
+										level.p.setAlive(false);
+										level.p.death();
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-			//not jumped
-			else
+			for (Object* x : level.objects)
 			{
-				movePlayer(level.objects[0], level.map, i);
-				for (Object* x : level.objects)
-				{
-					if (x->getMoveType() == 1)
-						continue;
-					if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
-					{
-						level.p.setAlive(false);
-						level.p.death();
-					}
-				}
-				while (level.map[level.p.getLocationX() - 5][level.p.getLocationY() - 5 + 1])
-				{
-					rlutil::msleep(75);
-					movePlayer(level.objects[0], level.map, rlutil::KEY_DOWN);
-					for (Object* x : level.objects)
-					{
-						if (x->getMoveType() == 1)
-							continue;
-						else
-							moveEnemy(x, level.map);
-						if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
-						{
-							level.p.setAlive(false);
-							level.p.death();
-						}
-					}
-					if (kbhit())
-					{
-						i = rlutil::getkey();
-						if (i == rlutil::KEY_LEFT)
-						{
-							rlutil::msleep(75);
-							movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
-							for (Object* x : level.objects)
-							{
-								if (x->getMoveType() == 1)
-									continue;
-								else
-									moveEnemy(x, level.map);
-								if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
-								{
-									level.p.setAlive(false);
-									level.p.death();
-								}
-							}
-						}
-						else if (i == rlutil::KEY_RIGHT)
-						{
-							rlutil::msleep(75);
-							movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
-							for (Object* x : level.objects)
-							{
-								if (x->getMoveType() == 1)
-									continue;
-								else
-									moveEnemy(x, level.map);
+				if (x->getMoveType() == 1)
+					continue;
+				else
+					moveEnemy(x, level.map);
 
-								if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
-								{
-									level.p.setAlive(false);
-									level.p.death();
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		for (Object* x : level.objects)
-		{
-			if (x->getMoveType() == 1)
-				continue;
-			else
-				moveEnemy(x, level.map);
-				
-			if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
-			{
+				if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
+				{
 					level.p.setAlive(false);
 					level.p.death();
+				}
 			}
 		}
+		
+		level.p.setAlive(true);
 	}
+	
 }
 
 void Run::runLevel_1(Level_1 level)
 {
 }
-
-
 
