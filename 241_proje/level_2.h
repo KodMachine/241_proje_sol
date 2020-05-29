@@ -16,7 +16,7 @@ public:
 	void getInfo();
 	int getCompX();
 	int getCompY();
-	Object* objects[5];
+	Object* objects[10];
 	void spawnPlayer(int, int);
 	void spawnHorizontalEnemy(int, int, Horizontal_Enemy* obj);
 	void spawnVerticalEnemy(int, int, Vertical_Enemy* obj);
@@ -26,8 +26,13 @@ public:
 	Player p;
 	Vertical_Enemy v;
 	Vertical_Enemy v2;
+	Vertical_Enemy v3;
+	Vertical_Enemy v4;
 	Horizontal_Enemy h;
+	Horizontal_Enemy h2;
+	Horizontal_Enemy h3;
 	Trap t;
+	Trap t2;
 
 private:
 	void loading();

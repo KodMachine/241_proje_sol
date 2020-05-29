@@ -6,9 +6,14 @@ Level_2::Level_2()
 	victory = false;
 	objects[0] = &p;
 	objects[1] = &t;
-	objects[2] = &h;
-	objects[3] = &v;
-	objects[4] = &v2;
+	objects[2] = &t2;
+	objects[3] = &h;
+	objects[4] = &h2;
+	objects[5] = &h3;
+	objects[6] = &v;
+	objects[7] = &v2;
+	objects[8] = &v3;
+	objects[9] = &v4;
 	map = new bool* [61];
 	for (int i = 0; i < 61; ++i)
 	{
@@ -36,7 +41,28 @@ void Level_2::drawMap()
 			rlutil::resetColor();
 			//draw path
 			rlutil::setColor(10);
-			if (y == 10 + startPointY) { rlutil::locate(x, y); std::cout << "^"; map[x - startPointX][y - startPointY] = false; }
+			if (x < startPointX + 15)
+			{
+				if (y == 10 + startPointY) { rlutil::locate(x, y); std::cout << "^"; map[x - startPointX][y - startPointY] = false; }
+			}
+			if (y >= 7 + startPointY && y <= 10 + startPointY)
+			{
+				if(x==15+startPointX) { rlutil::locate(x, y); std::cout << "^"; map[x - startPointX][y - startPointY] = false; }
+			}
+			if (y == 7 + startPointY)
+			{
+				if(x >= 15 + startPointX && x<=35+startPointX) { rlutil::locate(x, y); std::cout << "^"; map[x - startPointX][y - startPointY] = false; }
+			}
+			if (y >= 7 + startPointY && y <= 12 + startPointY)
+			{
+				if (x == 35 + startPointX) { rlutil::locate(x, y); std::cout << "^"; map[x - startPointX][y - startPointY] = false; }
+			}
+			if (x >= startPointX + 35)
+			{
+				if (y == 12 + startPointY) { rlutil::locate(x, y); std::cout << "^"; map[x - startPointX][y - startPointY] = false; }
+			}
+
+
 			//draw frame
 			rlutil::setBackgroundColor(8);
 			rlutil::setColor(8);
@@ -51,17 +77,22 @@ void Level_2::drawMap()
 
 	rlutil::setBackgroundColor(11);
 	rlutil::setColor(0);
-	compY = 9 + startPointY;
+	compY = 11 + startPointY;
 	compX = finishX - 1;
 	rlutil::locate(compX, compY);
 	std::cout << 'F';
 	rlutil::resetColor();
 
 	spawnPlayer(2 + startPointX, 9 + startPointY);
-	spawnHorizontalEnemy(45 + startPointX, 9 + startPointY, &h);
-	spawnVerticalEnemy(16 + startPointX, 9 + startPointY, &v);
-	spawnVerticalEnemy(46 + startPointX, 1 + startPointY, &v2);
-	placeTrap(25 + startPointX, 9 + startPointY, &t);
+	spawnHorizontalEnemy(12 + startPointX, 8 + startPointY, &h);
+	spawnHorizontalEnemy(55 + startPointX, 9 + startPointY, &h2);
+	spawnHorizontalEnemy(35 + startPointX, 7 + startPointY, &h3);
+	spawnVerticalEnemy(16 + startPointX, 6 + startPointY, &v);
+	spawnVerticalEnemy(28 + startPointX, 3 + startPointY, &v2);
+	spawnVerticalEnemy(38 + startPointX, 11 + startPointY, &v3);
+	spawnVerticalEnemy(49 + startPointX, 5 + startPointY, &v4);
+	placeTrap(24 + startPointX, 6 + startPointY, &t);
+	placeTrap(46 + startPointX, 11 + startPointY, &t2);
 }
 
 void Level_2::deleteMap()
@@ -121,7 +152,6 @@ bool Level_2::isFinish(int a, int b)
 {
 	if (a == compX && b == compY)
 	{
-		p.victory();
 		return true;
 	}
 	else

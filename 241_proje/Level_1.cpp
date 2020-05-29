@@ -121,7 +121,6 @@ bool Level_1::isFinish(int a , int b)
 {
 	if (a == compX && b == compY)
 	{
-		p.victory();
 		return true;
 	}
 	else
@@ -180,7 +179,7 @@ void Level_1::loading()
 		//:):):):):):):):):)
 		if (x == 50)
 		{
-			rlutil::msleep(4000);
+			rlutil::msleep(1200);
 		}
 		rlutil::locate(x, 12); std::cout << "O";
 		

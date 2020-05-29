@@ -32,7 +32,7 @@ Player::Player(int X, int Y, char C)
 }
 
 void Player::death()
-{
+{	/*
 	char isDone;
 	rlutil::cls();
 	rlutil::setColor(12);
@@ -49,6 +49,7 @@ void Player::death()
 		exit(0);
 	}
 	rlutil::cls();
+	*/
 }
 
 bool Player::getAlive()
@@ -63,13 +64,14 @@ void Player::setAlive(bool B)
 
 void Player::victory()
 {
+	/*
 	char isDone;
 
 	rlutil::cls();
 	rlutil::setColor(10);
 	rlutil::locate(36, 10); std::cout << "WOW YOU WON !  :')";
 	rlutil::msleep(1300);
-	rlutil::locate(20, 10); std::cout << "PLAY anykey   " << "     EXIT ESC";
+	rlutil::locate(20, 10); std::cout << "NEXT LEVEL anykey   " << "     EXIT ESC";
 	rlutil::locate(36, 12); std::cout << "SO : ";
 	std::cin >> isDone;
 	if (isDone == 'e' || isDone == 'E')
@@ -78,6 +80,6 @@ void Player::victory()
 	}
 	rlutil::cls();
 	rlutil::resetColor();
-
+	*/
 }
 
