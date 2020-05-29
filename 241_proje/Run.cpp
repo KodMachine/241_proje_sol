@@ -1,5 +1,6 @@
 #include "Run.h"
 
+
 Run::Run()
 {
 }
@@ -113,11 +114,14 @@ void Run::movePlayer(Object*& v, bool** map, int i)
 void Run::play()
 {
 	rlutil::CursorHider curs;
+	level.playIntro();
+	level.getInfo();
 	bool jumped = false;
 	bool jump = false;
 	while (true)
 	{
 		level.drawMap();
+		//move loop with gravity etc.
 		while ((!level.isFinish(level.p.getLocationX(), level.p.getLocationY())) && level.p.getAlive())
 		{
 			rlutil::msleep(75);
@@ -133,12 +137,14 @@ void Run::play()
 					{
 						rlutil::msleep(75);
 						movePlayer(level.objects[0], level.map, rlutil::KEY_UP);
+						//move all other objects
 						for (Object* x : level.objects)
 						{
 							if (x->getMoveType() == 1)
 								continue;
 							else
 								moveEnemy(x, level.map);
+							//check if player dead
 							if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 							{
 								level.p.setAlive(false);
@@ -153,12 +159,14 @@ void Run::play()
 							{
 								rlutil::msleep(75);
 								movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
+								//move all other objects
 								for (Object* x : level.objects)
 								{
 									if (x->getMoveType() == 1)
 										continue;
 									else
 										moveEnemy(x, level.map);
+									//check if player dead
 									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 									{
 										level.p.setAlive(false);
@@ -170,13 +178,14 @@ void Run::play()
 							{
 								rlutil::msleep(75);
 								movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
+								//move all other objects
 								for (Object* x : level.objects)
 								{
 									if (x->getMoveType() == 1)
 										continue;
 									else
 										moveEnemy(x, level.map);
-
+									//check if player dead
 									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 									{
 										level.p.setAlive(false);
@@ -191,12 +200,14 @@ void Run::play()
 					{
 						rlutil::msleep(75);
 						movePlayer(level.objects[0], level.map, rlutil::KEY_DOWN);
+						//move all other objects
 						for (Object* x : level.objects)
 						{
 							if (x->getMoveType() == 1)
 								continue;
 							else
 								moveEnemy(x, level.map);
+							//check if player dead
 							if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 							{
 								level.p.setAlive(false);
@@ -210,12 +221,14 @@ void Run::play()
 							{
 								rlutil::msleep(75);
 								movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
+								//move all other objects
 								for (Object* x : level.objects)
 								{
 									if (x->getMoveType() == 1)
 										continue;
 									else
 										moveEnemy(x, level.map);
+									//check if player dead
 									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 									{
 										level.p.setAlive(false);
@@ -227,13 +240,14 @@ void Run::play()
 							{
 								rlutil::msleep(75);
 								movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
+								//move all other objects
 								for (Object* x : level.objects)
 								{
 									if (x->getMoveType() == 1)
 										continue;
 									else
 										moveEnemy(x, level.map);
-
+									//check if player dead
 									if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 									{
 										level.p.setAlive(false);
@@ -248,10 +262,12 @@ void Run::play()
 				else
 				{
 					movePlayer(level.objects[0], level.map, i);
+					//move all other objects
 					for (Object* x : level.objects)
 					{
 						if (x->getMoveType() == 1)
 							continue;
+						//check if player dead
 						if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 						{
 							level.p.setAlive(false);
@@ -262,12 +278,14 @@ void Run::play()
 					{
 						rlutil::msleep(75);
 						movePlayer(level.objects[0], level.map, rlutil::KEY_DOWN);
+						//move all other objects
 						for (Object* x : level.objects)
 						{
 							if (x->getMoveType() == 1)
 								continue;
 							else
 								moveEnemy(x, level.map);
+							//check if player dead
 							if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 							{
 								level.p.setAlive(false);
@@ -281,6 +299,7 @@ void Run::play()
 							{
 								rlutil::msleep(75);
 								movePlayer(level.objects[0], level.map, rlutil::KEY_LEFT);
+								//move all other objects
 								for (Object* x : level.objects)
 								{
 									if (x->getMoveType() == 1)
@@ -298,6 +317,7 @@ void Run::play()
 							{
 								rlutil::msleep(75);
 								movePlayer(level.objects[0], level.map, rlutil::KEY_RIGHT);
+								//move all other objects
 								for (Object* x : level.objects)
 								{
 									if (x->getMoveType() == 1)
@@ -316,13 +336,14 @@ void Run::play()
 					}
 				}
 			}
+			//move all other objects
 			for (Object* x : level.objects)
 			{
 				if (x->getMoveType() == 1)
 					continue;
 				else
 					moveEnemy(x, level.map);
-
+				//check if player dead
 				if (level.p.getLocationX() == x->getLocationX() && level.p.getLocationY() == x->getLocationY())
 				{
 					level.p.setAlive(false);

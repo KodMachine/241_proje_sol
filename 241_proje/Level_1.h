@@ -5,7 +5,7 @@
 #include "Vertical_Enemy.h"
 #include "Horizontal_Enemy.h"
 
-//custom design level 1 aaahah
+//custom design level 1 
 class Level_1:public Map
 {
 public:
@@ -30,6 +30,7 @@ public:
 	Trap t;
 	
 private:
+	void loading();
 	int compX;
 	int compY;
 	bool victory;

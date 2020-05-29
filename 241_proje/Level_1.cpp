@@ -1,4 +1,5 @@
 #include "Level_1.h"
+#include <time.h>
 
 Level_1::Level_1()
 {
@@ -69,6 +70,13 @@ void Level_1::deleteMap()
 
 void Level_1::getInfo()
 {
+	loading();
+	rlutil::cls();
+	rlutil::setColor(10);
+	rlutil::locate(36, 10); std::cout << "LEVEL 1";
+	rlutil::msleep(1300);
+	rlutil::cls();
+	rlutil::resetColor();
 }
 
 int Level_1::getCompX()
@@ -112,12 +120,72 @@ void Level_1::placeTrap(int x, int y, Trap* obj)
 bool Level_1::isFinish(int a , int b)
 {
 	if (a == compX && b == compY)
+	{
+		p.victory();
 		return true;
+	}
 	else
 		return false;
 }
 
 void Level_1::playIntro()
 {
+	srand(time(NULL));
+	
+	bool flag = true;
+	while(flag)
+	{
+		int randX = rand() % (finishX - startPointX - 1) + startPointX + 1;
+		int randY = rand() % (finishY - startPointY - 1) + startPointY + 1;
+		rlutil::cls();
+		rlutil::setColor(10);
+		rlutil::locate(randX, randY); std::cout << "PRESS \"ENTER\" TO PLAY  :')";
+		rlutil::msleep(1000);
+		if (kbhit())
+		{
+			int crs = rlutil::getkey();
+			if (crs == rlutil::KEY_ENTER)
+			{
+				flag = false;
+			}
+		}
+	}
+	rlutil::resetColor();
+}
+
+void Level_1::loading()
+{
+	rlutil::saveDefaultColor();
+	rlutil::cls();
+	rlutil::setColor(10);
+	rlutil::locate(32, 10); std::cout << "Loading...";
+	for (int x = 20; x <= 52; x++)
+	{
+		for (int y = 11; y <= 13; y++)
+		{
+			rlutil::setBackgroundColor(8);
+			rlutil::setColor(8);
+			if (y == 11) { rlutil::locate(x, y); std::cout << "O";  }
+			if (x == 20) { rlutil::locate(x, y); std::cout << "O"; }
+			if (y == 13) { rlutil::locate(x, y); std::cout << "O"; }
+			if (x == 52) { rlutil::locate(x, y); std::cout << "O"; }
+		}
+	}
+	rlutil::msleep(2000);
+	for (int x = 21; x <= 51; x++)
+	{
+		rlutil::msleep(300);
+		rlutil::setBackgroundColor(10);
+		rlutil::setColor(10);
+		//:):):):):):):):):)
+		if (x == 50)
+		{
+			rlutil::msleep(4000);
+		}
+		rlutil::locate(x, 12); std::cout << "O";
+		
+	}
+	rlutil::cls();
+	rlutil::resetColor();
 }
 

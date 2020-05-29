@@ -150,6 +150,7 @@
     <ClCompile Include="241_proje.cpp" />
     <ClCompile Include="Horizontal_Enemy.cpp" />
     <ClCompile Include="Level_1.cpp" />
+    <ClCompile Include="level_2.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Horizontal_Enemy.h" />
     <ClInclude Include="Level_1.h" />
+    <ClInclude Include="level_2.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
