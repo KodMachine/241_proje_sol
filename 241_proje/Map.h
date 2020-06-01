@@ -16,6 +16,7 @@ public:
 	int getStartPointY();
 	int getFinishX();
 	int getFinishY();
+	//overload operator to access map array
 	bool*& operator[](const int& index)
 	{
 		return map[index];

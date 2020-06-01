@@ -1,3 +1,4 @@
-﻿  Run.cpp
+﻿  Level_1.cpp
 C:\Users\lenovo\source\repos\241_proje_sol\241_proje\rlutil.h(578,33): warning C4267: 'başlatılıyor': 'size_t' - 'unsigned int' dönüşümü; veri kaybı olabilir
+C:\Users\lenovo\source\repos\241_proje_sol\241_proje\Level_1.cpp(132,12): warning C4244: 'bağımsız değişken': 'time_t' - 'unsigned int' dönüşümü; veri kaybı olabilir
   241_proje.vcxproj -> C:\Users\lenovo\Source\Repos\241_proje_sol\x64\Debug\241_proje.exe

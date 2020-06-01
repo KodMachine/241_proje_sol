@@ -1,4 +1,6 @@
 ﻿// 241_proje.cpp : Bu dosya 'main' işlevi içeriyor. Program yürütme orada başlayıp biter.
+/*201911405 Can Ateş
+  201811041 Yazgı Kavukçu*/
 //
 
 #include <iostream>

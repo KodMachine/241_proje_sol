@@ -130,7 +130,8 @@ bool Level_1::isFinish(int a , int b)
 void Level_1::playIntro()
 {
 	srand(time(NULL));
-	
+	rlutil::locate(10, 10); std::cout << "USE ARROW KEYS TO MOVE";
+	rlutil::msleep(3000);
 	bool flag = true;
 	while(flag)
 	{
@@ -138,7 +139,7 @@ void Level_1::playIntro()
 		int randY = rand() % (finishY - startPointY - 1) + startPointY + 1;
 		rlutil::cls();
 		rlutil::setColor(10);
-		rlutil::locate(randX, randY); std::cout << "PRESS \"ENTER\" TO PLAY  :')";
+		rlutil::locate(randX, randY); std::cout << "PRESS \"ENTER\" TO PLAY  ";
 		rlutil::msleep(1000);
 		if (kbhit())
 		{
